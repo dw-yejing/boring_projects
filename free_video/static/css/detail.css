@@ -1,0 +1,39 @@
+.wrapper{
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 20px;
+}
+.series_title{
+    color: #ff183e;
+    font-size: 30px;
+    font-weight: 700;
+}
+.splitter{
+    height: 2px;
+    background-color: #eee;
+}
+.episode{
+    margin-top: 20px;
+}
+.episode .item {
+    *zoom: 1;
+    display: inline-block;
+    position: relative;
+    font-size: 14px;
+    letter-spacing: normal;
+    text-align: center;
+    vertical-align: top;
+    cursor: pointer;
+}
+.episode .item a {
+    display: block;
+    width: 39px;
+    height: 39px;
+    margin: 0 8px 15px 7px;
+    overflow: hidden;
+    border-radius: 20px;
+    background-color: #eee;
+    color: #666;
+    line-height: 39px;
+    text-overflow: ellipsis;
+}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>free video</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/detail.css') }}">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="series_title">剧集</div>
+        <div class="splitter"></div>
+        <div class="episode">
+        {% for episode in series %}
+            <span class="item">
+                <a href="{{ episode.link }}" target="_blank">
+                    <span>{{ episode.no }}</span>
+                </a>
+            </span>
+        {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>

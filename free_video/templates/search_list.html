@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>free video</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/search_list.css') }}">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="wrapper_main">
+        {% for video in videos %}
+            <div class="result_item result_item_v">
+                <div class="_infos">
+                    <a href="{{ video.link }}" class="figure result_figure" target="_blank">
+                        <img class="figure_pic" src="{{ video.picture }}" alt="{{ video.alt }}">
+                    </a>
+                    <h2 class="result_title">
+                        {{ video.title | safe }}
+                    </h2>
+                    <div class="result_info">
+                    {% for label in video.labels %}
+                        <div class="info_item info_item_odd">
+                            <span class="label">{{ label['label_title'] }}</span>
+                            <span class="content">{{ label['label_content'] }}</span>
+                        </div>
+                    {% endfor %}
+                        <div class="info_item info_item_desc">
+                            <span class="label">简　介：</span>
+                            <span class="desc_text">{{ video.desc }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

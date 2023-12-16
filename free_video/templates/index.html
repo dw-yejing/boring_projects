@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>free video</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+</head>
+<body>
+    <div class="mod_search">
+        <form id="searchForm" action="/search_list" method="post" target="_self">
+            <div class="search_keywords">
+                <input type="text" name="q" id="keywords" class="search_input" placeholder="请输入视频名称" autocomplete="off" />
+            </div>
+            <button class="search_btn" type="submit">搜索</button>
+        </form>
+    </div>
+</body>
+</html>
