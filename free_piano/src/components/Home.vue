@@ -31,7 +31,7 @@
             <Score></Score>
         </div>
     </div>
-</template>>
+</template>
 
 <script>
 import Piano from "@/components/Piano";
@@ -41,7 +41,7 @@ export default{
     data: function() {
         return {
             ///static/images/bg_default.jpg
-            currentWallpaper:'https://api.neweb.top/bing.php',
+            currentWallpaper:'/static/images/bg_default.jpg',
         }
     },
     components:{
