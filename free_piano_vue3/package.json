@@ -1,0 +1,26 @@
+{
+  "name": "freepiano",
+  "version": "1.0.0",
+  "description": "freepiano is an online piano application developed by HTML5 technology.",
+  "author": "yejing <643069127@qq.com>",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "jquery": "^3.7.1",
+    "tone": "^13.8.25",
+    "vue": "^3.4.5",
+    "vue-router": "^4.2.5"
+  },
+  "engines": {
+    "node": ">= 18.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "less": "^4.2.1",
+    "vite": "^6.0.6"
+  }
+}

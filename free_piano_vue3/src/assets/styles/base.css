@@ -1,0 +1,7 @@
+html body {
+  user-select: none;
+  position: relative;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  color: #373737;
+} 
