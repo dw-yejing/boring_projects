@@ -81,7 +81,7 @@
 <script>
 import { defineComponent, ref, computed, onMounted } from 'vue'
 import Notes from "@/assets/js/notes"
-import SmapleLibrary from '@/lib/Tonejs-Instruments'
+import SampleLibrary from '@/lib/Tonejs-Instruments'
 import wallpaper from "@/assets/js/wallpaper"
 
 export default defineComponent({
@@ -105,7 +105,7 @@ export default defineComponent({
             }, 300)
             bindKeyBoradEvent()
 
-            synth = SmapleLibrary.load({
+            synth = SampleLibrary.load({
                 instruments: "piano"
             }).toMaster()
         }

@@ -38,7 +38,7 @@ export default {
             sectionTitle: "快速入门",
             manualscoreList: ManualScore,
             showItem: {},
-            starBgImage: "background-image: url('@/assets/images/sprite.png');",
+            starBgImage: "background-image: url('/images/sprite.png');",
         }
     },
     mounted: function(){
