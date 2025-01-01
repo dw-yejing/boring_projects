@@ -5,3 +5,6 @@ venv
 *.log
 node_modules
 dist
+.hbuilderx
+.vite
+unpackage
