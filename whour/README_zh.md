@@ -21,6 +21,7 @@ whour是一个简洁、高效的工时记录应用，帮助您轻松管理和追
 ## 运行界面
 
 ![image](static/snapshot.png)
+
 ## 下载
 
 - [Android](https://pan.baidu.com/s/11dhuGnhKtOc-aLzuNaTzrw?pwd=5zyn)
