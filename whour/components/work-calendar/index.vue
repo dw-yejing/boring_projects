@@ -252,6 +252,10 @@ watch(() => props.value, (newVal) => {
 				.day-text, .hours-text {
 					color: #fff;
 				}
+
+				&.today .day-text::after {
+					color: #fff;
+				}
 			}
 			
 			.day-text {

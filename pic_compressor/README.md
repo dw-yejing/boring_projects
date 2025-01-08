@@ -52,9 +52,7 @@ Performance on test image (260x260 pixels):
 - Preserves color quality
 - Correctly handles transparency
 
-## 5. Optimization Parameters
-
-### 5.1 Key Parameters
+## 5. Key Parameters
 
 - Color count: 255 (1 reserved for transparency)
 - Quantization method: Median cut (method=2)
