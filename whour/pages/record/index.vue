@@ -6,21 +6,29 @@
 		
 		<view class="form-wrap">
 			<view class="form-item">
-				<text class="label">工作时长</text>
+				<view class="label" @tap="handleHoursFocus">工作时长</view>
 				<input 
+					id="hoursInput"
+					ref="hoursInputRef"
 					type="digit" 
 					v-model="hours"
 					class="input" 
 					placeholder="请输入工作时长(小时)"
+					:focus="hoursInputFocus"
+					@blur="onHoursBlur"
 				/>
 			</view>
 			
 			<view class="form-item">
-				<text class="label">工作内容</text>
+				<view class="label" @tap="handleContentFocus">工作内容</view>
 				<textarea 
+					ref="textareaRef"
 					v-model="content"
 					class="textarea"
 					placeholder="请输入工作内容描述"
+					:focus="textareaFocus"
+					@blur="onTextareaBlur"
+					auto-height
 				/>
 			</view>
 			
@@ -39,6 +47,29 @@ const store = useWorkHoursStore()
 const currentDate = ref(new Date())
 const hours = ref('')
 const content = ref('')
+const textareaRef = ref(null)
+const hoursInputRef = ref(null)
+const hoursInputFocus = ref(false)
+const textareaFocus = ref(false)
+
+function handleHoursFocus() {
+	hoursInputFocus.value = true
+	textareaFocus.value = false
+}
+
+function handleContentFocus() {
+	textareaFocus.value = true
+	hoursInputFocus.value = false
+}
+
+// 监听输入框失去焦点事件
+function onHoursBlur() {
+	hoursInputFocus.value = false
+}
+
+function onTextareaBlur() {
+	textareaFocus.value = false
+}
 
 // 保存工时
 async function handleSave() {
@@ -145,15 +176,17 @@ onLoad((options) => {
 			border-radius: 8rpx;
 			padding: 0 20rpx;
 			box-sizing: border-box;
+			font-size: 52rpx;
 		}
 		
 		.textarea {
 			width: 100%;
-			height: 200rpx;
+			min-height: 200rpx;
 			border: 1rpx solid #ddd;
 			border-radius: 8rpx;
 			padding: 20rpx;
 			box-sizing: border-box;
+			font-size: 52rpx;
 		}
 	}
 	

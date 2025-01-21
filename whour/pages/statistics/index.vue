@@ -31,15 +31,80 @@
 		</view>
 		
 		<button class="export-btn" @tap="handleExport">导出统计</button>
+
+		<!-- 字体大小调整浮动按钮 -->
+		<view class="font-size-control">
+			<view class="font-size-btn" @tap="showFontPanel = true">
+				<text class="iconfont">Aa</text>
+			</view>
+		</view>
+
+		<!-- 字体大小调整面板 -->
+		<view class="font-size-panel" v-if="showFontPanel" @tap.stop>
+			<view class="panel-mask" @tap="showFontPanel = false"></view>
+			<view class="panel-content">
+				<view class="panel-header">
+					<text>字体大小</text>
+					<text class="close-btn" @tap="showFontPanel = false">×</text>
+				</view>
+				<view class="panel-body">
+					<button class="size-btn" @tap="decreaseFontSize">A-</button>
+					<text class="size-value">{{fontSize}}</text>
+					<button class="size-btn" @tap="increaseFontSize">A+</button>
+				</view>
+				<button class="reset-btn" @tap="resetFontSize">重置</button>
+			</view>
+		</view>
 	</view>
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { useWorkHoursStore } from '@/stores/workHours'
 import { formatMonth, formatDateShort, formatDate } from '@/utils/date'
 
 const store = useWorkHoursStore()
+const baseFontSize = 32
+const fontSizeStep = 4
+const fontSize = ref(uni.getStorageSync('listFontSize') || baseFontSize)
+const showFontPanel = ref(false)
+
+// 计算字体大小样式
+const fontSizeStyle = computed(() => fontSize.value + 'rpx')
+
+// 增大字体
+function increaseFontSize() {
+	if (fontSize.value < 60) {
+		fontSize.value += fontSizeStep
+		console.log("===", fontSize.value)
+		saveFontSize()
+	}
+}
+
+// 减小字体
+function decreaseFontSize() {
+	if (fontSize.value > 24) {
+		fontSize.value -= fontSizeStep
+		saveFontSize()
+	}
+}
+
+// 重置字体
+function resetFontSize() {
+	fontSize.value = baseFontSize
+	saveFontSize()
+}
+
+// 保存字体大小
+function saveFontSize() {
+	uni.setStorageSync('listFontSize', fontSize.value)
+	// 添加反馈提示
+	uni.showToast({
+		title: '字体大小已更新',
+		icon: 'none',
+		duration: 500
+	})
+}
 
 // 月份切换
 function handleMonthChange(e) {
@@ -84,7 +149,7 @@ onMounted(() => {
 
 <style lang="scss">
 .container {
-	padding: 30rpx;
+	padding: 20rpx 12rpx;
 	height: 100vh;
 	box-sizing: border-box;
 	display: flex;
@@ -92,15 +157,15 @@ onMounted(() => {
 }
 
 .statistics-header {
-	margin-bottom: 30rpx;
+	margin-bottom: 20rpx;
 	
 	.month-picker {
 		background-color: #fff;
-		padding: 20rpx;
+		padding: 16rpx;
 		border-radius: 8rpx;
 		
 		.picker-text {
-			font-size: 32rpx;
+			font-size: 36rpx;
 			color: #333;
 			text-align: center;
 		}
@@ -111,23 +176,23 @@ onMounted(() => {
 	flex: 1;
 	background-color: #fff;
 	border-radius: 12rpx;
-	padding: 30rpx;
-	margin-bottom: 30rpx;
+	padding: 20rpx 12rpx;
+	margin-bottom: 20rpx;
 	display: flex;
 	flex-direction: column;
 	
 	.total-hours {
 		text-align: center;
-		margin-bottom: 40rpx;
+		margin-bottom: 20rpx;
 		
 		.label {
-			font-size: 28rpx;
+			font-size: 32rpx;
 			color: #666;
 			margin-right: 20rpx;
 		}
 		
 		.value {
-			font-size: 40rpx;
+			font-size: 48rpx;
 			color: #007AFF;
 			font-weight: bold;
 		}
@@ -140,11 +205,12 @@ onMounted(() => {
 		
 		.list-header {
 			display: flex;
-			padding: 20rpx 0;
+			padding: 16rpx 0;
 			border-bottom: 1rpx solid #eee;
-			font-size: 28rpx;
+			font-size: v-bind(fontSizeStyle);
 			color: #666;
 			font-weight: bold;
+			text-align: center;
 		}
 		
 		.list-content {
@@ -153,9 +219,9 @@ onMounted(() => {
 		
 		.list-item {
 			display: flex;
-			padding: 20rpx 0;
+			padding: 16rpx 0;
 			border-bottom: 1rpx solid #eee;
-			font-size: 28rpx;
+			font-size: v-bind(fontSizeStyle);
 			
 			&:last-child {
 				border-bottom: none;
@@ -163,17 +229,26 @@ onMounted(() => {
 		}
 		
 		.date-col {
-			width: 180rpx;
+			width: 160rpx;
+			font-size: v-bind(fontSizeStyle);
+			text-align: center;
 		}
 		
 		.hours-col {
-			width: 100rpx;
+			width: 120rpx;
 			text-align: center;
+			font-size: v-bind(fontSizeStyle);
+			padding: 0 10rpx;
 		}
 		
 		.content-col {
 			flex: 1;
-			color: #666;
+			font-weight: 500;
+			font-size: v-bind(fontSizeStyle);
+			text-align: left;
+			padding-left: 20rpx;
+			white-space: normal;
+			word-break: break-all;
 		}
 	}
 }
@@ -184,6 +259,120 @@ onMounted(() => {
 	
 	&:active {
 		opacity: 0.8;
+	}
+}
+
+.font-size-control {
+	position: fixed;
+	right: 20rpx;
+	top: 20rpx;
+	z-index: 100;
+	
+	.font-size-btn {
+		width: 80rpx;
+		height: 80rpx;
+		background: #007AFF;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.2);
+		
+		.iconfont {
+			color: #fff;
+			font-size: 32rpx;
+			font-weight: bold;
+		}
+		
+		&:active {
+			opacity: 0.8;
+		}
+	}
+}
+
+.font-size-panel {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 999;
+	
+	.panel-mask {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		background: rgba(0,0,0,0.4);
+	}
+	
+	.panel-content {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: 560rpx;
+		background: #fff;
+		border-radius: 20rpx;
+		padding: 30rpx;
+		
+		.panel-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 30rpx;
+			font-size: 32rpx;
+			
+			.close-btn {
+				font-size: 40rpx;
+				color: #999;
+				padding: 0 20rpx;
+				
+				&:active {
+					opacity: 0.8;
+				}
+			}
+		}
+		
+		.panel-body {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: 30rpx;
+			
+			.size-btn {
+				width: 120rpx;
+				height: 80rpx;
+				line-height: 80rpx;
+				background: #f5f5f5;
+				border-radius: 8rpx;
+				font-size: 32rpx;
+				
+				&:active {
+					opacity: 0.8;
+				}
+			}
+			
+			.size-value {
+				font-size: 36rpx;
+				color: #333;
+				font-weight: bold;
+			}
+		}
+		
+		.reset-btn {
+			width: 100%;
+			height: 80rpx;
+			line-height: 80rpx;
+			background: #f5f5f5;
+			color: #666;
+			font-size: 28rpx;
+			
+			&:active {
+				opacity: 0.8;
+			}
+		}
 	}
 }
 </style> 
