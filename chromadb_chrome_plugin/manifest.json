@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "ChromaDB Manager",
+  "version": "1.0",
+  "description": "A Chrome extension for managing ChromaDB vector database",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs"
+  ],
+  "host_permissions": [
+    "http://localhost:*/*",
+    "http://127.0.0.1:*/*"
+  ],
+  "action": {
+    "default_icon": {
+      "16": "img/16.png",
+      "48": "img/48.png",
+      "128": "img/128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "img/16.png",
+    "48": "img/48.png",
+    "128": "img/128.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+} 
