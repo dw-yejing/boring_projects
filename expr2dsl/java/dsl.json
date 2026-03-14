@@ -1,0 +1,151 @@
+{
+  "query" : {
+    "bool" : {
+      "must" : [ {
+        "bool" : {
+          "should" : [ {
+            "multi_match" : {
+              "query" : "氢气浓度",
+              "fields" : [ "title", "keywords", "abstract" ],
+              "type" : "phrase"
+            }
+          }, {
+            "multi_match" : {
+              "query" : "氢浓度",
+              "fields" : [ "title", "keywords", "abstract" ],
+              "type" : "phrase"
+            }
+          }, {
+            "multi_match" : {
+              "query" : "浓度衰减",
+              "fields" : [ "title", "keywords", "abstract" ],
+              "type" : "phrase"
+            }
+          }, {
+            "bool" : {
+              "must" : [ {
+                "multi_match" : {
+                  "query" : "衰减模型",
+                  "fields" : [ "title", "keywords", "abstract" ],
+                  "type" : "phrase"
+                }
+              }, {
+                "multi_match" : {
+                  "query" : "膜湿度",
+                  "fields" : [ "title", "keywords", "abstract" ],
+                  "type" : "phrase"
+                }
+              } ]
+            }
+          }, {
+            "multi_match" : {
+              "query" : "湿度",
+              "fields" : [ "title", "keywords", "abstract" ],
+              "type" : "phrase"
+            }
+          }, {
+            "multi_match" : {
+              "query" : "加湿",
+              "fields" : [ "title", "keywords", "abstract" ],
+              "type" : "phrase"
+            }
+          }, {
+            "bool" : {
+              "must" : [ {
+                "multi_match" : {
+                  "query" : "水含量",
+                  "fields" : [ "title", "keywords", "abstract" ],
+                  "type" : "phrase"
+                }
+              }, {
+                "multi_match" : {
+                  "query" : "泄露率",
+                  "fields" : [ "title", "keywords", "abstract" ],
+                  "type" : "phrase"
+                }
+              } ]
+            }
+          }, {
+            "multi_match" : {
+              "query" : "泄漏率",
+              "fields" : [ "title", "keywords", "abstract" ],
+              "type" : "phrase"
+            }
+          }, {
+            "multi_match" : {
+              "query" : "渗透率",
+              "fields" : [ "title", "keywords", "abstract" ],
+              "type" : "phrase"
+            }
+          }, {
+            "bool" : {
+              "must" : [ {
+                "multi_match" : {
+                  "query" : "实测",
+                  "fields" : [ "title", "keywords", "abstract" ],
+                  "type" : "phrase"
+                }
+              }, {
+                "multi_match" : {
+                  "query" : "电堆",
+                  "fields" : [ "title", "keywords", "abstract" ],
+                  "type" : "phrase"
+                }
+              } ]
+            }
+          }, {
+            "multi_match" : {
+              "query" : "燃料电池",
+              "fields" : [ "title", "keywords", "abstract" ],
+              "type" : "phrase"
+            }
+          }, {
+            "multi_match" : {
+              "query" : "电堆寿命",
+              "fields" : [ "title", "keywords", "abstract" ],
+              "type" : "phrase"
+            }
+          }, {
+            "bool" : {
+              "must" : [ {
+                "multi_match" : {
+                  "query" : "使用寿命",
+                  "fields" : [ "title", "keywords", "abstract" ],
+                  "type" : "phrase"
+                }
+              }, {
+                "bool" : {
+                  "should" : [ {
+                    "multi_match" : {
+                      "query" : "H01M8",
+                      "fields" : [ "IPC" ]
+                    }
+                  }, {
+                    "multi_match" : {
+                      "query" : "H01M4",
+                      "fields" : [ "IPC" ]
+                    }
+                  } ],
+                  "minimum_should_match" : 1
+                }
+              } ]
+            }
+          } ],
+          "minimum_should_match" : 1
+        }
+      }, {
+        "range" : {
+          "APD" : {
+            "gte" : "20200101",
+            "lte" : "20251231"
+          }
+        }
+      }, {
+        "multi_match" : {
+          "query" : "燃料电池",
+          "fields" : [ "title", "keywords", "abstract" ]
+        }
+      } ]
+    }
+  }
+}

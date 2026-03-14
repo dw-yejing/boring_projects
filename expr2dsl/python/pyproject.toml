@@ -1,0 +1,9 @@
+[project]
+name = "expr2dsl"
+version = "0.1.0"
+description = "Expression to Elasticsearch Query DSL compiler (AND/OR/NOT, fields, ranges)."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "lark>=1.3.1",
+]
